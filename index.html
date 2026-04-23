@@ -27,12 +27,13 @@
       line-height: 1.5;
     }
 
+    .wrap { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
+
     /* ── HEADER ── */
     header {
       border-top: 4px solid var(--red);
       padding: 2rem 0 1.5rem;
     }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
     header h1 {
       font-size: 1.75rem;
       font-weight: 700;
@@ -40,10 +41,7 @@
       line-height: 1.15;
       margin-bottom: 0.4rem;
     }
-    header .deck {
-      color: var(--mid);
-      font-size: 0.9rem;
-    }
+    header .deck { color: var(--mid); font-size: 0.9rem; }
 
     /* ── SECTION ── */
     .section { padding: 2rem 0; border-top: 1px solid var(--rule); }
@@ -56,13 +54,35 @@
       margin-bottom: 1rem;
     }
 
+    /* ── VERDICT (now first) ── */
+    .verdict {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--rule);
+    }
+    .v-cell {
+      padding: 1.25rem;
+      border-right: 1px solid var(--rule);
+    }
+    .v-cell:last-child { border-right: none; }
+    .v-cell .pub {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .v-cell.ft  .pub { color: var(--ft); }
+    .v-cell.eco .pub { color: var(--eco); }
+    .v-cell.atl .pub { color: var(--atl); }
+    .v-cell p { font-size: 0.82rem; color: var(--mid); line-height: 1.5; }
+    .v-cell strong { color: var(--dark); }
+
     /* ── LENGTH STATS ── */
     .length-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
       border: 1px solid var(--rule);
-      margin-bottom: 1.5rem;
     }
     .stat {
       padding: 1.1rem 1.25rem;
@@ -88,81 +108,70 @@
     .stat.ft  .avg { color: var(--ft); }
     .stat.eco .avg { color: var(--eco); }
     .stat.atl .avg { color: var(--atl); }
-    .stat .sub { font-size: 0.75rem; color: var(--mid); }
+    .stat .sub   { font-size: 0.75rem; color: var(--mid); }
     .stat .range { font-size: 0.72rem; color: var(--light); margin-top: 0.15rem; }
 
-    /* ── ARTICLE TABLE ── */
-    .atab { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-    .atab th {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--light);
-      text-align: left;
-      padding: 0.4rem 0.6rem;
-      border-bottom: 2px solid var(--dark);
-    }
-    .atab td {
-      padding: 0.38rem 0.6rem;
-      border-bottom: 1px solid var(--rule);
-      vertical-align: top;
-    }
-    .atab tr:last-child td { border-bottom: none; }
-    .atab .col { font-size: 0.7rem; color: var(--mid); white-space: nowrap; }
-    .atab .w { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
-    .atab .bar-cell { width: 140px; padding-right: 0; }
-    .bar { height: 8px; border-radius: 1px; display: block; }
-    .bar.ft  { background: var(--ft); }
-    .bar.eco { background: var(--eco); }
-    .bar.atl { background: var(--atl); }
+    /* ── PER-PUB ARGUMENT STRUCTURE ── */
+    .pub-struct { margin-bottom: 2rem; }
+    .pub-struct:last-child { margin-bottom: 0; }
 
-    /* ── THREE-COLUMN STRUCTURE ── */
-    .struct-grid {
-      display: grid;
-      grid-template-columns: 120px 1fr 1fr 1fr;
-      border: 1px solid var(--rule);
-      font-size: 0.82rem;
+    .ps-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--dark);
+      margin-bottom: 0;
     }
-    .struct-head {
-      font-size: 0.68rem;
+    .ps-header .ps-name {
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 0.6rem 0.8rem;
-      border-bottom: 2px solid var(--dark);
     }
-    .struct-head.phase { color: var(--light); }
-    .struct-head.ft    { color: var(--ft);  border-left: 1px solid var(--rule); }
-    .struct-head.eco   { color: var(--eco); border-left: 1px solid var(--rule); }
-    .struct-head.atl   { color: var(--atl); border-left: 1px solid var(--rule); }
-    .struct-row { display: contents; }
-    .struct-cell {
-      padding: 0.7rem 0.8rem;
+    .ps-header.ft  .ps-name { color: var(--ft); }
+    .ps-header.eco .ps-name { color: var(--eco); }
+    .ps-header.atl .ps-name { color: var(--atl); }
+    .ps-header .ps-tagline {
+      font-size: 0.82rem;
+      color: var(--mid);
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 110px 1fr;
       border-bottom: 1px solid var(--rule);
-      vertical-align: top;
     }
-    .struct-row:last-child .struct-cell { border-bottom: none; }
-    .struct-cell.phase-label {
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      padding: 0.7rem 0.8rem 0.7rem 0;
       font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--light);
-      background: #fafafa;
-      display: flex;
-      align-items: center;
+      border-right: 1px solid var(--rule);
     }
-    .struct-cell.ft-col  { border-left: 1px solid var(--rule); }
-    .struct-cell.eco-col { border-left: 1px solid var(--rule); background: #fffafa; }
-    .struct-cell.atl-col { border-left: 1px solid var(--rule); }
-    .struct-cell strong { display: block; font-size: 0.78rem; margin-bottom: 0.15rem; }
-    .struct-cell span   { color: var(--mid); font-size: 0.78rem; line-height: 1.4; }
-    .ex {
+    .step-body {
+      padding: 0.7rem 0 0.7rem 0.9rem;
+    }
+    .step-body strong {
+      display: block;
+      font-size: 0.84rem;
+      margin-bottom: 0.2rem;
+    }
+    .step-body span {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.45;
+      display: block;
+    }
+    .step-body em {
       display: block;
       font-style: italic;
       color: var(--light);
-      font-size: 0.73rem;
+      font-size: 0.75rem;
       margin-top: 0.3rem;
       line-height: 1.35;
     }
@@ -186,38 +195,9 @@
     }
     .etab tr:last-child td { border-bottom: none; }
     .etab td:not(:first-child) { text-align: center; }
-    .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin: 0 1px; }
-    .dot-on  { background: var(--dark); }
-    .dot-off { background: var(--rule); }
     .etab th.ft  { color: var(--ft); }
     .etab th.eco { color: var(--eco); }
     .etab th.atl { color: var(--atl); }
-
-    /* ── VERDICT ── */
-    .verdict {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 1px solid var(--rule);
-      margin-top: 0;
-    }
-    .v-cell {
-      padding: 1.25rem;
-      border-right: 1px solid var(--rule);
-    }
-    .v-cell:last-child { border-right: none; }
-    .v-cell .pub {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .v-cell.ft  .pub { color: var(--ft); }
-    .v-cell.eco .pub { color: var(--eco); }
-    .v-cell.atl .pub { color: var(--atl); }
-    .v-cell p { font-size: 0.82rem; color: var(--mid); line-height: 1.5; }
-    .v-cell strong { color: var(--dark); }
 
     footer {
       border-top: 1px solid var(--rule);
@@ -226,12 +206,11 @@
       color: var(--light);
     }
 
-    @media (max-width: 640px) {
-      .length-stats { grid-template-columns: 1fr; }
-      .stat { border-right: none; border-bottom: 1px solid var(--rule); }
-      .struct-grid { grid-template-columns: 80px 1fr 1fr 1fr; font-size: 0.73rem; }
-      .verdict { grid-template-columns: 1fr; }
-      .v-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    @media (max-width: 600px) {
+      .verdict, .length-stats { grid-template-columns: 1fr; }
+      .v-cell, .stat { border-right: none; border-bottom: 1px solid var(--rule); }
+      .v-cell:last-child, .stat:last-child { border-bottom: none; }
+      .step { grid-template-columns: 80px 1fr; }
     }
   </style>
 </head>
@@ -243,10 +222,28 @@
     <p class="deck">A structural comparison of <em>First Things</em>, <em>The Economist</em>, and <em>The Atlantic</em> — 32 articles, April 2026</p>
   </header>
 
+  <!-- IN SHORT -->
+  <div class="section">
+    <div class="section-label">In short</div>
+    <div class="verdict">
+      <div class="v-cell ft">
+        <div class="pub">First Things</div>
+        <p>Argues from <strong>tradition</strong>. Authority is external and historical. Every piece escalates to civilisational stakes. Closes like a sermon.</p>
+      </div>
+      <div class="v-cell eco">
+        <div class="pub">The Economist</div>
+        <p>Argues from <strong>evidence</strong>. The writer disappears; the institution speaks. Arguments stay bounded. Closes like a verdict.</p>
+      </div>
+      <div class="v-cell atl">
+        <div class="pub">The Atlantic</div>
+        <p>Argues from <strong>experience</strong>. The writer's witnessed life is the primary credential. Closes like the last line of a short story.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- LENGTH -->
   <div class="section">
-    <div class="section-label">Length</div>
-
+    <div class="section-label">Length — 32 articles sampled</div>
     <div class="length-stats">
       <div class="stat ft">
         <div class="pub">First Things</div>
@@ -267,171 +264,163 @@
         <div class="range">range 974 – 11,579 (incl. Magazine)</div>
       </div>
     </div>
-
-    <!-- Article lists -->
-    <table class="atab">
-      <thead>
-        <tr>
-          <th>Publication / Article</th>
-          <th class="col">Type</th>
-          <th class="bar-cell"></th>
-          <th class="w">Words</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- FT -->
-        <tr><td><strong>First Things</strong></td><td></td><td></td><td></td></tr>
-        <tr><td>The Savannah Enlightenment</td><td class="col">Essay</td><td class="bar-cell"><span class="bar ft" style="width:100%"></span></td><td class="w">5,350</td></tr>
-        <tr><td>Ratzinger in the Whirlwind</td><td class="col">Review</td><td class="bar-cell"><span class="bar ft" style="width:63%"></span></td><td class="w">3,350</td></tr>
-        <tr><td>The West Distorted</td><td class="col">Review</td><td class="bar-cell"><span class="bar ft" style="width:62%"></span></td><td class="w">3,300</td></tr>
-        <tr><td>Does Just War Doctrine Require Moral Certainty?</td><td class="col">Opinion</td><td class="bar-cell"><span class="bar ft" style="width:45%"></span></td><td class="w">2,400</td></tr>
-        <tr><td>Trump, Leo, and the Death of Integralism</td><td class="col">Opinion</td><td class="bar-cell"><span class="bar ft" style="width:45%"></span></td><td class="w">2,400</td></tr>
-        <tr><td>The Church of David Bowie</td><td class="col">Essay</td><td class="bar-cell"><span class="bar ft" style="width:41%"></span></td><td class="w">2,200</td></tr>
-        <tr><td>Faith-Based Failures</td><td class="col">Opinion</td><td class="bar-cell"><span class="bar ft" style="width:39%"></span></td><td class="w">2,100</td></tr>
-        <tr><td>"Ecclesiacide," Then and Now</td><td class="col">Opinion</td><td class="bar-cell"><span class="bar ft" style="width:23%"></span></td><td class="w">1,250</td></tr>
-        <tr><td>The Almost-Greatness of Trump and Leo XIV</td><td class="col">Opinion</td><td class="bar-cell"><span class="bar ft" style="width:22%"></span></td><td class="w">1,150</td></tr>
-        <tr><td>The Trans War Is Not Over</td><td class="col">Opinion</td><td class="bar-cell"><span class="bar ft" style="width:21%"></span></td><td class="w">1,100</td></tr>
-        <!-- Eco -->
-        <tr><td><strong>The Economist</strong></td><td></td><td></td><td></td></tr>
-        <tr><td>America is vulnerable to electoral vandalism</td><td class="col">Leader</td><td class="bar-cell"><span class="bar eco" style="width:21%"></span></td><td class="w">1,100</td></tr>
-        <tr><td>Lexington — Why Congress keeps getting dumber</td><td class="col">Column</td><td class="bar-cell"><span class="bar eco" style="width:20%"></span></td><td class="w">1,051</td></tr>
-        <tr><td>Bagehot — Sir Keir Starmer cannot govern</td><td class="col">Column</td><td class="bar-cell"><span class="bar eco" style="width:21%"></span></td><td class="w">1,073</td></tr>
-        <tr><td>Obituary — Mark Mobius</td><td class="col">Obituary</td><td class="bar-cell"><span class="bar eco" style="width:19%"></span></td><td class="w">1,032</td></tr>
-        <tr><td>Schumpeter — State capitalism is exaggerated</td><td class="col">Column</td><td class="bar-cell"><span class="bar eco" style="width:19%"></span></td><td class="w">1,011</td></tr>
-        <tr><td>Charlemagne — Europe regulated itself into vassalage</td><td class="col">Column</td><td class="bar-cell"><span class="bar eco" style="width:19%"></span></td><td class="w">995</td></tr>
-        <tr><td>Banyan — What have the Mughals ever done for us?</td><td class="col">Column</td><td class="bar-cell"><span class="bar eco" style="width:15%"></span></td><td class="w">813</td></tr>
-        <tr><td>How to bolster the arsenal of democracy</td><td class="col">Leader</td><td class="bar-cell"><span class="bar eco" style="width:15%"></span></td><td class="w">802</td></tr>
-        <tr><td>The high price of forever wars</td><td class="col">Leader</td><td class="bar-cell"><span class="bar eco" style="width:15%"></span></td><td class="w">796</td></tr>
-        <tr><td>Buttonwood — The stablecoin market</td><td class="col">Column</td><td class="bar-cell"><span class="bar eco" style="width:14%"></span></td><td class="w">755</td></tr>
-        <tr><td>It's complicated (UK–US relations)</td><td class="col">Leader</td><td class="bar-cell"><span class="bar eco" style="width:14%"></span></td><td class="w">728</td></tr>
-        <tr><td>Tim Cook wrote a winning recipe for Apple</td><td class="col">Leader</td><td class="bar-cell"><span class="bar eco" style="width:13%"></span></td><td class="w">675</td></tr>
-        <!-- Atlantic -->
-        <tr><td><strong>The Atlantic</strong></td><td></td><td></td><td></td></tr>
-        <tr><td>I Found It: The Best Free Restaurant Bread in America</td><td class="col">Magazine</td><td class="bar-cell"><span class="bar atl" style="width:100%"></span></td><td class="w">11,579</td></tr>
-        <tr><td>On Losing a Daughter</td><td class="col">Magazine</td><td class="bar-cell"><span class="bar atl" style="width:43%"></span></td><td class="w">4,993</td></tr>
-        <tr><td>A 'Barbaric' Problem in American Hospitals</td><td class="col">Health</td><td class="bar-cell"><span class="bar atl" style="width:21%"></span></td><td class="w">2,479</td></tr>
-        <tr><td>If I Tried to Escape, I Would Be Killed</td><td class="col">Ideas</td><td class="bar-cell"><span class="bar atl" style="width:21%"></span></td><td class="w">2,405</td></tr>
-        <tr><td>The Questionable Triumph of the 'Baling Wire Hippies'</td><td class="col">Books</td><td class="bar-cell"><span class="bar atl" style="width:13%"></span></td><td class="w">1,511</td></tr>
-        <tr><td>The 'Missing Scientist' Story Is Unbelievably Dumb</td><td class="col">Science</td><td class="bar-cell"><span class="bar atl" style="width:13%"></span></td><td class="w">1,498</td></tr>
-        <tr><td>Trump Voters Like Marco Rubio More and More</td><td class="col">Ideas</td><td class="bar-cell"><span class="bar atl" style="width:13%"></span></td><td class="w">1,461</td></tr>
-        <tr><td>Apple Is Boring Now</td><td class="col">Ideas</td><td class="bar-cell"><span class="bar atl" style="width:10%"></span></td><td class="w">1,137</td></tr>
-        <tr><td>Life Isn't Easy in the OnlyFans Economy</td><td class="col">Culture</td><td class="bar-cell"><span class="bar atl" style="width:9%"></span></td><td class="w">1,071</td></tr>
-        <tr><td>The Virginia Gerrymander Disenfranchises Republicans</td><td class="col">Ideas</td><td class="bar-cell"><span class="bar atl" style="width:8%"></span></td><td class="w">974</td></tr>
-      </tbody>
-    </table>
   </div>
 
   <!-- ARGUMENT STRUCTURE -->
   <div class="section">
-    <div class="section-label">Argument structure — side by side</div>
+    <div class="section-label">Argument structure</div>
 
-    <div class="struct-grid">
-      <div class="struct-head phase">Phase</div>
-      <div class="struct-head ft">First Things</div>
-      <div class="struct-head eco">The Economist</div>
-      <div class="struct-head atl">The Atlantic</div>
+    <!-- FIRST THINGS -->
+    <div class="pub-struct">
+      <div class="ps-header ft">
+        <span class="ps-name">First Things</span>
+        <span class="ps-tagline">7-phase · avg. 2,460 words · named scholar in every article</span>
+      </div>
+      <div class="step">
+        <div class="step-num">1. Hook</div>
+        <div class="step-body">
+          <strong>Literary allusion, dramatic scene, or wordplay — never the thesis</strong>
+          <span>Opens with a Chesterton quotation, a Yiddish proverb, a coined neologism, or a vivid historical anecdote. Establishes the frame before the argument begins.</span>
+          <em>"G. K. Chesterton's novel The Flying Inn begins with a strange seaside encounter…"</em>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2. Concession</div>
+        <div class="step-body">
+          <strong>Grant the strongest version of the opposing view</strong>
+          <span>Appears in 7 of 10 articles. Establishes intellectual fairness before the attack. The reader is positioned as a reasonable person who might initially disagree.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3. Pivot</div>
+        <div class="step-body">
+          <strong>"But actually…" — the real thesis, buried at paragraph 2–4</strong>
+          <span>The "yes, but" structure is the defining move. Concede, then counter. The thesis arrives late and with force.</span>
+          <em>"Profound dread is a reasonable reaction… But it is chiefly these fears which we may, as Christians, find relief."</em>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4. Genealogy</div>
+        <div class="step-body">
+          <strong>Named scholarly authority + historical precedent across centuries</strong>
+          <span>Named scholars, Church Fathers, or classical texts in every article. Data and statistics almost entirely absent. Evidence is textual and historical, not empirical.</span>
+          <em>Bellarmine, Newman, Anscombe, Psalm 139, Acts 2, 1 Corinthians 15:17</em>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5. Application</div>
+        <div class="step-body">
+          <strong>How the historical case illuminates the present</strong>
+          <span>The recovered tradition is aimed at a contemporary problem — a policy question, a political figure, a cultural crisis.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6. Escalation</div>
+        <div class="step-body">
+          <strong>Zoom out to civilisational or theological stakes — always</strong>
+          <span>Every article widens before the close. A debate about just war becomes a question about what Christianity is. A book review becomes a warning about Western self-understanding.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7. Close</div>
+        <div class="step-body">
+          <strong>Prophetic — 1–3 paragraphs, invoking a historical standard</strong>
+          <span>Prescriptive or urgent. Often names a historical figure whose example the present fails to meet. Closes like a sermon.</span>
+          <em>"We are not asked to be unafraid. We are asked to believe that the one who says 'Do not be afraid' has earned the right to say it."</em>
+        </div>
+      </div>
+    </div>
 
-      <!-- 1 Opening -->
-      <div class="struct-cell phase-label">1. Opening</div>
-      <div class="struct-cell ft-col">
-        <strong>Literary allusion or dramatic scene</strong>
-        <span>Never the thesis. Opens with a Chesterton quote, a Yiddish proverb, a wordplay neologism, or a vivid anecdote. The hook establishes the frame before the argument begins.</span>
-        <em class="ex">"G. K. Chesterton's novel The Flying Inn begins with a strange seaside encounter…"</em>
+    <!-- THE ECONOMIST -->
+    <div class="pub-struct">
+      <div class="ps-header eco">
+        <span class="ps-name">The Economist</span>
+        <span class="ps-tagline">5-phase · avg. 902 words · data in every article · no byline</span>
       </div>
-      <div class="struct-cell eco-col">
-        <strong>Stark claim or data barrage</strong>
-        <span>Often the thesis itself. Opens with a single blunt sentence or a cascade of statistics. The reader knows the argument within 30 words.</span>
-        <em class="ex">"Britain is ungoverned." / "THE WORLD is rearming fast. Military spending has increased every year for a decade."</em>
+      <div class="step">
+        <div class="step-num">1. Claim</div>
+        <div class="step-body">
+          <strong>Stark declarative sentence or data barrage — often the thesis itself</strong>
+          <span>The reader knows the argument within 30 words. No extended hook. No scene-setting for its own sake.</span>
+          <em>"Britain is ungoverned." / "THE WORLD is rearming fast. Military spending has increased every year for a decade."</em>
+        </div>
       </div>
-      <div class="struct-cell atl-col">
-        <strong>First-person scene or provocative thesis</strong>
-        <span>The writer in a situation, or the thesis stated baldly in the title and first sentence. Personal experience substitutes for the hook.</span>
-        <em class="ex">"I remember screaming, though I don't know what words I screamed." / "Tim Cook's job was to make Apple boring—and he did."</em>
+      <div class="step">
+        <div class="step-num">2. Pivot</div>
+        <div class="step-body">
+          <strong>One adversative word flips the opening — within the first 5 sentences</strong>
+          <span>"Yet," "But," or "Still" introduces the core tension immediately. Concession is a clause, not a paragraph.</span>
+          <em>"Yet although the outlook for Democrats is good, for America's democracy it is alarming."</em>
+        </div>
       </div>
+      <div class="step">
+        <div class="step-num">3. Evidence</div>
+        <div class="step-body">
+          <strong>Precise data + named individuals as typological cases</strong>
+          <span>Statistics appear in every article, often with exact figures and dates. Named real people (Thom Tillis, Peter Mandelson) illustrate structural arguments — they are cases, not authorities.</span>
+          <em>"European NATO members will spend an additional €300bn per year by end of decade."</em>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4. Prescription</div>
+        <div class="step-body">
+          <strong>What should be done — 1–2 paragraphs, stays bounded to the specific question</strong>
+          <span>Arguments do not escalate to civilisational stakes. A leader on Israel's military doctrine does not become a meditation on Western decline. The Economist considers this a virtue.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5. Kicker ■</div>
+        <div class="step-body">
+          <strong>One ironic or judicial sentence, then ■ — never a summary</strong>
+          <span>Crystallises the argument into its sharpest form and stops. The ■ is the full stop. This is the most structurally distinctive feature of Economist writing.</span>
+          <em>"A superpower in rule-making, yet a supplicant in everything else that matters. ■" / "Britain is not ungovernable. Even so, Sir Keir cannot govern. ■"</em>
+        </div>
+      </div>
+    </div>
 
-      <!-- 2 Thesis -->
-      <div class="struct-cell phase-label">2. Thesis</div>
-      <div class="struct-cell ft-col">
-        <strong>Buried — paragraph 2–4</strong>
-        <span>Always preceded by a concession to the opposing view. The "yes, but" structure is a defining feature: grant the best version of the other side, then pivot.</span>
-        <em class="ex">"Profound dread is a reasonable reaction… But it is chiefly these fears which we may, as Christians, find relief."</em>
+    <!-- THE ATLANTIC -->
+    <div class="pub-struct">
+      <div class="ps-header atl">
+        <span class="ps-name">The Atlantic</span>
+        <span class="ps-tagline">Two templates (Ideas vs. Magazine) · "I" in 7 of 10 articles · bimodal length</span>
       </div>
-      <div class="struct-cell eco-col">
-        <strong>Within first 5 sentences</strong>
-        <span>Typically introduced by a single adversative word — "Yet," "But," "Still" — that flips the opening setup. Concession is brief, often just one clause.</span>
-        <em class="ex">"Yet although the outlook for Democrats is good, for America's democracy it is alarming."</em>
+      <div class="step">
+        <div class="step-num">1. Opening</div>
+        <div class="step-body">
+          <strong>First-person scene (Ideas) or thesis in title + sentence 1 (Opinion)</strong>
+          <span>Ideas pieces state the thesis in the headline and repeat it immediately. Magazine features open inside an experience — no thesis declared.</span>
+          <em>"I remember screaming, though I don't know what words I screamed." / "Tim Cook's job was to make Apple boring—and he did."</em>
+        </div>
       </div>
-      <div class="struct-cell atl-col">
-        <strong>Title and sentence 1 (Ideas) / Embedded (Magazine)</strong>
-        <span>Opinion pieces state the thesis in the headline, then repeat it immediately. Magazine features withhold it entirely, letting the argument emerge through narrative.</span>
-        <em class="ex">"Apple Is Boring Now" → "Tim Cook's job was to make Apple boring—and he did."</em>
+      <div class="step">
+        <div class="step-num">2. Authority</div>
+        <div class="step-body">
+          <strong>Personal credential established — the writer's experience is the evidence</strong>
+          <span>"I run weekly focus groups." "I had been working in Iraq for a decade." "My husband refused to go to the ER." The "I" is structural, not stylistic — it legitimises the claim.</span>
+        </div>
       </div>
-
-      <!-- 3 Evidence -->
-      <div class="struct-cell phase-label">3. Evidence</div>
-      <div class="struct-cell ft-col">
-        <strong>Named authority + historical genealogy</strong>
-        <span>Cites named scholars, Church Fathers, or classical texts by name in every article. Traces precedent across centuries. Data and statistics are almost entirely absent.</span>
-        <em class="ex">Bellarmine, Newman, Anscombe, Psalm 139, Acts 2, 1 Corinthians 15:17</em>
+      <div class="step">
+        <div class="step-num">3. Evidence</div>
+        <div class="step-body">
+          <strong>Personal testimony + named individuals the writer has met directly</strong>
+          <span>Data appears but less precisely than the Economist. Named sources are people observed first-hand, not scholars or historical figures.</span>
+          <em>"'Marco Rubio, I think, is an amazing dude,' said Ken, a Biden 2020/Trump 2024 voter from Georgia."</em>
+        </div>
       </div>
-      <div class="struct-cell eco-col">
-        <strong>Data + named individuals as types</strong>
-        <span>Precise statistics in every article. Named real people (Thom Tillis, Peter Mandelson) serve as typological cases for structural arguments, not as authorities.</span>
-        <em class="ex">"European NATO members will spend an additional €300bn per year by end of decade."</em>
+      <div class="step">
+        <div class="step-num">4. Diagnosis</div>
+        <div class="step-body">
+          <strong>The personal case reveals a structural or systemic problem</strong>
+          <span>One person's experience becomes evidence for a broader claim about hospitals, institutions, or politics. The move from particular to general is shown, not announced.</span>
+        </div>
       </div>
-      <div class="struct-cell atl-col">
-        <strong>Personal testimony + selective data</strong>
-        <span>The writer's own experience is primary evidence. Data appears but less precisely. Named individuals are people the writer has met or observed directly.</span>
-        <em class="ex">"I run weekly focus groups… 'Marco Rubio, I think, is an amazing dude,' said Ken, a Biden 2020/Trump 2024 voter from Georgia."</em>
-      </div>
-
-      <!-- 4 Escalation -->
-      <div class="struct-cell phase-label">4. Escalation</div>
-      <div class="struct-cell ft-col">
-        <strong>Always — to civilizational or theological stakes</strong>
-        <span>Every article zooms out before the close. A debate about just war becomes a debate about what Christianity is. A book review becomes a warning about Western self-understanding.</span>
-      </div>
-      <div class="struct-cell eco-col">
-        <strong>Rare — stays bounded to the policy question</strong>
-        <span>Arguments stay at the level they started. A leader on Israel's military doctrine does not become a meditation on Western civilisation. The Economist considers this a virtue.</span>
-      </div>
-      <div class="struct-cell atl-col">
-        <strong>Occasional — implied, not announced</strong>
-        <span>Some pieces reach toward a broader implication in the closing paragraph, but it is understated rather than declared. The Atlantic does not preach.</span>
-        <em class="ex">"Their absence can't be blamed on China, Russia, or Iran. Maybe the White House should look into it."</em>
-      </div>
-
-      <!-- 5 Close -->
-      <div class="struct-cell phase-label">5. Close</div>
-      <div class="struct-cell ft-col">
-        <strong>Prophetic — invokes a historical standard</strong>
-        <span>1–3 paragraphs. Prescriptive or urgent. Often names a historical figure (Thomas More, Newman, Pope Leo I) whose example the present fails to meet.</span>
-        <em class="ex">"We are not asked to be unafraid. We are asked to believe that the one who says 'Do not be afraid' has earned the right to say it."</em>
-      </div>
-      <div class="struct-cell eco-col">
-        <strong>Single "kicker" sentence, then ■</strong>
-        <span>One ironic or judicial sentence — never a summary. Crystallises the argument into its sharpest form and stops. The ■ is the full stop.</span>
-        <em class="ex">"A superpower in rule-making, yet a supplicant in everything else that matters. ■" / "Britain is not ungovernable. Even so, Sir Keir cannot govern. ■"</em>
-      </div>
-      <div class="struct-cell atl-col">
-        <strong>Emotional image or echoed thesis</strong>
-        <span>Returns to the opening scene, or restates the thesis once more — plainly, without fanfare. Magazine features close like short stories.</span>
-        <em class="ex">"Tim Cook saw to it, and now somebody else will." / "He woke early one morning, agitated and coughing, calling out, 'Elisabeth?' I was there. But then, in a blink, he wasn't."</em>
-      </div>
-
-      <!-- 6 Voice -->
-      <div class="struct-cell phase-label">6. Voice</div>
-      <div class="struct-cell ft-col">
-        <strong>Named intellectual</strong>
-        <span>Writer is identified. Authority derives from command of the tradition. Occasional first person, but always deferring outward to a larger source.</span>
-      </div>
-      <div class="struct-cell eco-col">
-        <strong>Anonymous institution</strong>
-        <span>"I" never appears. The Economist speaks as a corporate entity. Authority derives from observable reality and data, not the individual writer's identity or experience.</span>
-      </div>
-      <div class="struct-cell atl-col">
-        <strong>Named writer as witness</strong>
-        <span>"I" appears in 7 of 10 articles. Authority derives from direct experience. The writer's credentials are the story they were present for, not the books they have read.</span>
+      <div class="step">
+        <div class="step-num">5. Close</div>
+        <div class="step-body">
+          <strong>Emotional image or echoed thesis — closes like a short story, not a verdict</strong>
+          <span>Returns to the opening scene, or restates the thesis plainly without fanfare. Escalation is occasional and understated. The Atlantic does not preach.</span>
+          <em>"Tim Cook saw to it, and now somebody else will." / "He woke early one morning, calling out, 'Elisabeth?' I was there. But then, in a blink, he wasn't."</em>
+        </div>
       </div>
     </div>
   </div>
@@ -495,28 +484,7 @@
     </table>
   </div>
 
-  <!-- VERDICT -->
-  <div class="section">
-    <div class="section-label">In short</div>
-    <div class="verdict">
-      <div class="v-cell ft">
-        <div class="pub">First Things</div>
-        <p>Argues from <strong>tradition</strong>. The most persuasive authority is external and historical. Every piece escalates to civilizational stakes. Closes like a sermon.</p>
-      </div>
-      <div class="v-cell eco">
-        <div class="pub">The Economist</div>
-        <p>Argues from <strong>evidence</strong>. The writer disappears; the institution speaks. Arguments stay bounded. Closes like a verdict.</p>
-      </div>
-      <div class="v-cell atl">
-        <div class="pub">The Atlantic</div>
-        <p>Argues from <strong>experience</strong>. The writer's witnessed life is the primary credential. Closes like the last line of a short story.</p>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <div class="wrap">32 articles scraped April 2026. Analysis by Claude (Anthropic).</div>
-  </footer>
+  <footer>32 articles scraped April 2026. Analysis by Claude (Anthropic).</footer>
 
 </div>
 </body>
